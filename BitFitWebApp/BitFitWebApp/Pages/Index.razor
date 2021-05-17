@@ -1,0 +1,67 @@
+﻿@page "/"
+@using BitFitWebApp.Models
+@using BitFitWebApp.Components.Buttons
+
+<div style="height: 100px; max-height:100px;" class="row pl-4">
+    @if (!SignedIn)
+    {
+        <div>
+            <h1>Welcome to Bitfit!</h1>
+            <h3>Choose an account</h3>
+        </div>
+    }
+    else
+    {
+        <div>
+            <button class="btn btn-primary" style="top:55px; right:0; position:absolute" @onclick="SignOut">Sign Out</button>
+            <h1>Welcome @CurrentUser.Fullname!</h1>
+            <h5>Your resting heart rate is @CurrentUser.RestHeartRate bpm</h5>
+            <h5>Your VO2max is @CurrentUser.VO2Max ml/kg/min</h5>
+            <h5>You currently are in endurance group @CurrentUser.EnduranceGroup</h5>
+        </div>
+    }
+</div>
+<div class="row">
+    @if (!SignedIn)
+    {
+        <div class="col col-nav">
+
+            <div style="height: 660px; max-height:100%; overflow-y:auto; background-color:#eee;">
+                @*A button for every known user*@
+                @if (Users != null)
+                {
+                    @foreach (var user in Users)
+                    {
+                        <button class="btn btn-primary" style="width:100%" @onclick="() => SelectUser(user)">@user.Fullname</button>
+                    }
+                }
+                <br />
+            </div>
+            <div class="content-nav-bottom">
+                <button class="btn btn-primary" style="width:100%" @onclick="OnNewUser">Add new user</button>
+            </div>
+        </div>
+        <div class="col">
+            @if (AddingUser)
+            {
+                <div style="height:660px; max-height:100%">
+                    @if (LastSubmitResult != null)
+                    {
+                        <h2>
+                            Last submit status: @LastSubmitResult
+                        </h2>
+                    }
+                    <EditForm Model="CurrentUser" OnSubmit="AddUser">
+                        <div style="height:660px; max-height:100%;">
+                            <h6>Full name: </h6><InputText class="form-control editItemInput" placeholder="Full name" @bind-Value="CurrentUser.Fullname"></InputText><br />
+                            <h6>Gender(M/F): </h6><InputText class="form-control editItemInput" placeholder="Gender" @bind-Value="CurrentUser.Gender"></InputText><br />
+                            <h6>Age: </h6><InputNumber class="form-control editItemInput" placeholder="Age" @bind-Value="CurrentUser.Age"></InputNumber><br />
+                            <h6>Resting heart rate: </h6><InputNumber class="form-control editItemInput" placeholder="Resting heart rate" @bind-Value="CurrentUser.RestHeartRate"></InputNumber>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
+                    </EditForm>
+                </div>
+            }
+        </div>
+    }
+</div>

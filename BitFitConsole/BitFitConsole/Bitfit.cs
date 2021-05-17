@@ -6,6 +6,8 @@ namespace BitFitConsole
     class Bitfit
     {
         public static List<User> Users = new List<User>() { new User("Glenn Visser", "M", 21, 66) };
+        public static List<Schedule> Schedules = new List<Schedule>() { };
+        public static List<Workout> Workouts = new List<Workout>() { new Workout("HIIT", 45) };
         public static User currentUser;
 
         public static void SignIn()
