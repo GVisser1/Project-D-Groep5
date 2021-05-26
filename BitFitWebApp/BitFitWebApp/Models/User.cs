@@ -25,9 +25,7 @@ namespace BitFitWebApp.Models
         private double[] row5femaleVO2 = new double[] { 0.0, 20.2, 22.8, 27.0, 31.5, 35.8 };
         private double[] row6femaleVO2 = new double[] { 0.0, 17.5, 20.2, 24.5, 30.3, 31.5 };
 
-        /*public string Fullname, Gender;
-        public double Age, RestHeartRate, MaxHeartRate, VO2Max;
-        public int EnduranceGroup;*/
+        public int Id { get; set; }
         public string Fullname { get; set; }
         public string Gender { get; set; }
         public double Age { get; set; }
@@ -35,16 +33,8 @@ namespace BitFitWebApp.Models
         public double MaxHeartRate { get; set; }
         public double VO2Max { get; set; }
         public int EnduranceGroup { get; set; }
-        /*public User(string fullName, string gender, double age, double restHeartRate)
-        {
-            Fullname = fullName;
-            Gender = gender;
-            Age = age;
-            RestHeartRate = restHeartRate;
-            MaxHeartRate = 220 - Age;
-            VO2Max = Math.Round(((MaxHeartRate / RestHeartRate) * 15), 2);
-            EnduranceGroup = CheckEndurance(CheckAgeThreshold());
-        }*/
+        public int CurrentScheduleId { get; set; }
+        public int NextScheduleId { get; set; }
 
         public int CheckAgeThreshold()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BitFitWebApp.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using BitFitWebApp.Models;
@@ -10,7 +11,7 @@ namespace BitFitWebApp.Pages
     public partial class Index
     {
         protected User CurrentUser;
-        public List<User> Users = new List<User>();
+        public static List<User> Users = new List<User>();
         protected bool AddingUser { get; set; }
         protected bool SignedIn { get; set; }
         public string LastSubmitResult;

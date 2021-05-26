@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using BitFitWebApp.Data;
 
 namespace BitFitWebApp
 {
@@ -14,6 +16,7 @@ namespace BitFitWebApp
     {
         public static async Task Main(string[] args)
         {
+            UserData.CreateUsers();
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 

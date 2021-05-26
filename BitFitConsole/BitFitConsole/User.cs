@@ -6,8 +6,10 @@ namespace BitFitConsole
 {
     public class User
     {
+        public int Id;
         public string Fullname, Gender;
-        public double Age, RestHeartRate, MaxHeartRate, VO2Max;
+        public double Age, RestHeartRate;
+        protected double MaxHeartRate, VO2Max;
         public int EnduranceGroup;
         private int[] ageThresholds = new int[] { 13, 20, 30, 40, 50, 60 };
 
