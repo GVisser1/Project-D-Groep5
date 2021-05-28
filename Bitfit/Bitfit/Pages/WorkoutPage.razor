@@ -1,0 +1,43 @@
+﻿@page "/workouts"
+@using Bitfit.Pages
+
+<div style="height: 100px; max-height:100px;" class="row pl-4">
+    @if (UserPage.CurrentUser == null)
+    {
+        <div>
+            <h1>Workouts</h1>
+            <a role="button" class="btn btn-primary" href="/">Login</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h1>Workouts</h1>
+        </div>
+    }
+</div>
+<div class="row">
+    @if (UserPage.CurrentUser != null)
+    {
+        <div class="content-nav-bottom">
+            <button class="btn btn-primary" style="width:100%" @onclick="OnNewWorkout">Add new workout</button>
+        </div>
+        <div class="col">
+            @if (AddingWorkout)
+            {
+                <div style="height:660px; max-height:100%">
+                    <EditForm Model="CurrentWorkout" OnValidSubmit="AddWorkout">
+                        <div style="height:660px; max-height:100%;">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+                            <h6>Type: </h6><InputText class="form-control editItemInput" placeholder="Full name" @bind-Value="CurrentWorkout.Type"></InputText><br />
+                            <h6>Rank: </h6><InputNumber class="form-control editItemInput" placeholder="Age" @bind-Value="CurrentWorkout.Rank"></InputNumber><br />
+                            <h6>Description: </h6><InputNumber class="form-control editItemInput" placeholder="Resting heart rate" @bind-Value="CurrentWorkout.Description"></InputNumber>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
+                    </EditForm>
+                </div>
+            }
+        </div>
+    }
+</div>
