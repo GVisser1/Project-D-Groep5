@@ -1,3 +1,50 @@
 ﻿@page "/schedules"
 
-<h3>Schedules</h3>
+<div style="height: 100px; max-height:100px;" class="row pl-4">
+    @if (!UserPage.SignedIn)
+    {
+        <div>
+            <h1>Schedules</h1>
+            <a role="button" class="btn btn-primary" href="/">Login</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h1>Schedules</h1>
+        </div>
+    }
+</div>
+<div class="row">
+    @if (UserPage.SignedIn)
+    {
+        <div class="content-nav-bottom">
+            <button class="btn btn-primary" style="width:100%" @onclick="OnNewSchedule">Add new workout</button>
+        </div>
+        <div>
+            @if (UserPage.CurrentUser.Schedules != null)
+            {
+                @foreach (var schedule in UserPage.CurrentUser.Schedules)
+                {
+                    <h3>@schedule.Name</h3><br />
+                }
+            }
+        </div>
+        <div class="col">
+            @if (AddingSchedule)
+            {
+                <div style="height:660px; max-height:100%">
+                    <EditForm Model="CurrentSchedule" OnValidSubmit="AddSchedule">
+                        <div style="height:660px; max-height:100%;">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+                            <h6>Name: </h6><InputText class="form-control editItemInput" placeholder="Name" @bind-Value="CurrentSchedule.Name"></InputText><br />
+                            <h6>Rank: </h6><InputNumber class="form-control editItemInput" placeholder="Rank" @bind-Value="CurrentSchedule.Rank"></InputNumber><br />
+                        </div>
+                        <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
+                    </EditForm>
+                </div>
+            }
+        </div>
+    }
+</div>

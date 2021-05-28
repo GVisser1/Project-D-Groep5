@@ -15,12 +15,44 @@ namespace Bitfit.Pages
         [Inject]
         private DatabaseService DatabaseService { get; set; }
         protected List<User> AllUsers { get; set; }
+        protected List<Schedule> AllSchedules { get; set; }
         public static User CurrentUser;
+        public static bool SignedIn;
         protected bool AddingUser { get; set; }
         protected override void OnInitialized()
         {
             AllUsers = DatabaseService.DB.Users.ToList();
+            AllSchedules = DatabaseService.DB.Schedules.ToList();
             StateHasChanged();
+        }
+        public void SelectUser(User user)
+        {
+            CurrentUser = user;
+            SignedIn = true;
+        }
+        public void SelectSchedule(Schedule schedule)
+        {
+            CurrentUser.Schedules = new List<Schedule>();
+            CurrentUser.Schedules.Add(schedule);
+        }
+        public void SignOut()
+        {
+            CurrentUser = null;
+            SignedIn = false;
+        }
+        public void OnNewUser()
+        {
+            AddingUser = true;
+            CurrentUser = new User();
+        }
+        public async Task AddUser(EditContext editContext)
+        {
+            CurrentUser.Rank = CalcEnduranceRank();
+            DatabaseService.DB.Users.Add(CurrentUser);
+            await DatabaseService.DB.SaveChangesAsync();
+            AllUsers = DatabaseService.DB.Users.ToList();
+            StateHasChanged();
+            AddingUser = false;
         }
         public int CalcMaxHeartRate()
         {
@@ -126,28 +158,6 @@ namespace Bitfit.Pages
                     break;
             }
             return -1;
-        }
-        public void SelectUser(User user)
-        {
-            CurrentUser = user;
-        }
-        public void SignOut()
-        {
-            CurrentUser = null;
-        }
-        public void OnNewUser()
-        {
-            AddingUser = true;
-            CurrentUser = new User();
-        }
-        public async Task AddUser(EditContext editContext)
-        {
-            CurrentUser.Rank = CalcEnduranceRank();
-            DatabaseService.DB.Users.Add(CurrentUser);
-            await DatabaseService.DB.SaveChangesAsync();
-            AllUsers = DatabaseService.DB.Users.ToList();
-            StateHasChanged();
-            AddingUser = false;
         }
     }
 }
