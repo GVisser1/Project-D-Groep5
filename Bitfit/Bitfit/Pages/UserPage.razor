@@ -52,13 +52,6 @@
                             <h6>Gender(M/F): </h6><InputText class="form-control editItemInput" placeholder="Gender" @bind-Value="CurrentUser.Gender"></InputText><br />
                             <h6>Age: </h6><InputNumber class="form-control editItemInput" placeholder="Age" @bind-Value="CurrentUser.Age"></InputNumber><br />
                             <h6>Resting heart rate: </h6><InputNumber class="form-control editItemInput" placeholder="Resting heart rate" @bind-Value="CurrentUser.RestHeartRate"></InputNumber>
-                            <h6>Schedules:</h6>
-                            <div style="height: 410px; max-height:410px; overflow-y:auto; background-color:#eee;">
-                                @foreach (var schedule in AllSchedules)
-                                {
-                                    <button class="btn btn-primary" style="width:100%" @onclick="() => SelectSchedule(schedule)">@schedule.Name</button>
-                                }
-                            </div>
                         </div>
                         <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
                     </EditForm>

@@ -28,6 +28,8 @@ namespace Bitfit.Pages
         }
         public async Task AddSchedule(EditContext editContext)
         {
+            CurrentSchedule.UserId = UserPage.CurrentUser.Id;
+            CurrentSchedule.Rank = UserPage.CurrentUser.Rank;
             DatabaseService.DB.Schedules.Add(CurrentSchedule);
             await DatabaseService.DB.SaveChangesAsync();
             AllSchedules = DatabaseService.DB.Schedules.ToList();

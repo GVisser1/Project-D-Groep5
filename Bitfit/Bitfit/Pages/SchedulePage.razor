@@ -18,17 +18,21 @@
 <div class="row">
     @if (UserPage.SignedIn)
     {
-        <div class="content-nav-bottom">
-            <button class="btn btn-primary" style="width:100%" @onclick="OnNewSchedule">Add new workout</button>
-        </div>
-        <div>
-            @if (UserPage.CurrentUser.Schedules != null)
-            {
-                @foreach (var schedule in UserPage.CurrentUser.Schedules)
+        <div class="col col-nav">
+
+            <div style="height: 660px; max-height:100%; overflow-y:auto; background-color:#eee;">
+                @if (UserPage.CurrentUser.Schedules != null)
                 {
-                    <h3>@schedule.Name</h3><br />
+                    @foreach (var schedule in UserPage.CurrentUser.Schedules)
+                    {
+                        <h6>@schedule.Name</h6>
+                    }
                 }
-            }
+                <br />
+            </div>
+            <div class="content-nav-bottom">
+                <button class="btn btn-primary" style="width:100%" @onclick="OnNewSchedule">Add new schedule</button>
+            </div>
         </div>
         <div class="col">
             @if (AddingSchedule)
@@ -39,7 +43,6 @@
                             <DataAnnotationsValidator />
                             <ValidationSummary />
                             <h6>Name: </h6><InputText class="form-control editItemInput" placeholder="Name" @bind-Value="CurrentSchedule.Name"></InputText><br />
-                            <h6>Rank: </h6><InputNumber class="form-control editItemInput" placeholder="Rank" @bind-Value="CurrentSchedule.Rank"></InputNumber><br />
                         </div>
                         <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
                     </EditForm>
