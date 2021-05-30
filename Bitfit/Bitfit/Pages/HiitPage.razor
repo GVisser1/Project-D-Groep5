@@ -1,0 +1,28 @@
+﻿@page "/hiitworkout"
+
+<div style="height: 100px; max-height:100px;" class="row pl-4">
+    @if (!UserPage.SignedIn)
+    {
+        <div>
+            <h1>You are not signed in!</h1>
+            <a role="button" class="btn btn-primary" href="/">Login</a>
+        </div>
+    }
+    else if (UserPage.SignedIn && CurrentWorkout == null)
+    {
+        <div>
+            <h1>No data available</h1>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h1>HIIT</h1>
+            <h5>@CurrentWorkout.Description</h5>
+            <h5>The length of the HIIT is @Length min</h5>
+            <h5>During this workout you are expected to accelerate @Accelerations times</h5>
+            <h5>Each acceleration lasts @AccelerationTime sec</h5>
+            <h5>It is advised to take a @BreakTime min break after each acceleration</h5>
+        </div>
+    }
+</div>

@@ -4,50 +4,67 @@
     @if (!UserPage.SignedIn)
     {
         <div>
-            <h1>Schedules</h1>
+            <h1>You are not signed in!</h1>
             <a role="button" class="btn btn-primary" href="/">Login</a>
         </div>
     }
     else
     {
         <div>
-            <h1>Schedules</h1>
+            <h1>Your schedule</h1>
         </div>
     }
 </div>
 <div class="row">
-    @if (UserPage.SignedIn)
+    @if (UserPage.SignedIn && CurrentSchedule != null)
     {
         <div class="col col-nav">
-
-            <div style="height: 660px; max-height:100%; overflow-y:auto; background-color:#eee;">
-                @if (UserPage.CurrentUser.Schedules != null)
-                {
-                    @foreach (var schedule in UserPage.CurrentUser.Schedules)
-                    {
-                        <h6>@schedule.Name</h6>
-                    }
-                }
-                <br />
-            </div>
-            <div class="content-nav-bottom">
-                <button class="btn btn-primary" style="width:100%" @onclick="OnNewSchedule">Add new schedule</button>
-            </div>
+            <table style="width:100%">
+                <tr>
+                    <th style="text-align: left">Day of the week</th>
+                    <th style="text-align: left"> Workout</th>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>Strength</td>
+                    <td><a role="button" class="btn btn-primary" style="width:100%" href="/strengthworkout">View workout</a></td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>---Rest---</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>HIIT</td>
+                    <td><a role="button" class="btn btn-primary" style="width:100%" href="/hiitworkout">View workout</a></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>---Rest---</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>---Rest---</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>Endurance</td>
+                    <td><a role="button" class="btn btn-primary" style="width:100%" href="/enduranceworkout">View workout</a></td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>---Rest---</td>
+                </tr>
+            </table>
         </div>
-        <div class="col">
-            @if (AddingSchedule)
-            {
-                <div style="height:660px; max-height:100%">
-                    <EditForm Model="CurrentSchedule" OnValidSubmit="AddSchedule">
-                        <div style="height:660px; max-height:100%;">
-                            <DataAnnotationsValidator />
-                            <ValidationSummary />
-                            <h6>Name: </h6><InputText class="form-control editItemInput" placeholder="Name" @bind-Value="CurrentSchedule.Name"></InputText><br />
-                        </div>
-                        <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
-                    </EditForm>
-                </div>
-            }
+    }
+    @if (UserPage.SignedIn && CurrentSchedule == null)
+    {
+        <div class="col col-nav">
+            <div class="content-nav-bottom">
+                <button class="btn btn-primary" style="width:100%" @onclick="AddSchedule">Add new schedule</button>
+            </div>
         </div>
     }
 </div>

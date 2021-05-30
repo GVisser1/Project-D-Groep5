@@ -15,23 +15,56 @@ namespace Bitfit.Pages
         [Inject]
         private DatabaseService DatabaseService { get; set; }
         protected List<User> AllUsers { get; set; }
+        protected List<Schedule> AllSchedules { get; set; }
+        protected List<Workout> AllWorkouts { get; set; }
         public static User CurrentUser;
         public static bool SignedIn;
         protected bool AddingUser { get; set; }
         protected override void OnInitialized()
         {
             AllUsers = DatabaseService.DB.Users.ToList();
+            AllSchedules = DatabaseService.DB.Schedules.ToList();
+            AllWorkouts = DatabaseService.DB.Workouts.ToList();
             StateHasChanged();
         }
         public void SelectUser(User user)
         {
             CurrentUser = user;
+            foreach (var schedule in AllSchedules)
+            {
+                if(schedule.UserId == CurrentUser.Id)
+                {
+                    SchedulePage.CurrentSchedule = schedule;
+                    break;
+                }
+            }
             SignedIn = true;
+            foreach (var workout in AllWorkouts)
+            {
+                if (SchedulePage.CurrentSchedule != null && workout.ScheduleId == SchedulePage.CurrentSchedule.Id)
+                {
+                    switch (workout.Type)
+                    {
+                        case "HIIT":
+                            HiitPage.CurrentWorkout = workout;
+                            break;
+                        case "Endurance":
+                            EndurancePage.CurrentWorkout = workout;
+                            break;
+                        case "Strength":
+                            StrengthPage.CurrentWorkout = workout;
+                            break;
+                    }
+                }
+            }
         }
         public void SignOut()
         {
             CurrentUser = null;
             SignedIn = false;
+            HiitPage.CurrentWorkout = null;
+            EndurancePage.CurrentWorkout = null;
+            StrengthPage.CurrentWorkout = null;
         }
         public void OnNewUser()
         {
