@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Bitfit.Models;
 using Microsoft.AspNetCore.Components.Forms;
-using System.Data;
 
 namespace Bitfit.Pages
 {
