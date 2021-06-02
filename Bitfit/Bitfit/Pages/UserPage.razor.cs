@@ -22,6 +22,7 @@ namespace Bitfit.Pages
         public void SelectUser(User user)
         {
             CurrentUser = user;
+            SchedulePage.CurrentSchedule = null;
             foreach (var schedule in AllSchedules)
             {
                 if(schedule.Id == CurrentUser.ScheduleId)
@@ -31,20 +32,23 @@ namespace Bitfit.Pages
                 }
             }
             SignedIn = true;
-            var TempWorkouts = DbFunctions.GetCurrentWorkouts();
-            foreach (var workout in TempWorkouts)
+            if(SchedulePage.CurrentSchedule != null)
             {
-                switch (workout.Type)
+                var TempWorkouts = DbFunctions.GetCurrentWorkouts();
+                foreach (var workout in TempWorkouts)
                 {
-                    case "HIIT":
-                        HiitPage.CurrentWorkout = workout;
-                        break;
-                    case "Endurance":
-                        EndurancePage.CurrentWorkout = workout;
-                        break;
-                    case "Strength":
-                        StrengthPage.CurrentWorkout = workout;
-                        break;
+                    switch (workout.Type)
+                    {
+                        case "HIIT":
+                            HiitPage.CurrentWorkout = workout;
+                            break;
+                        case "Endurance":
+                            EndurancePage.CurrentWorkout = workout;
+                            break;
+                        case "Strength":
+                            StrengthPage.CurrentWorkout = workout;
+                            break;
+                    }
                 }
             }
         }
@@ -65,7 +69,7 @@ namespace Bitfit.Pages
         {
             CurrentUser.Rank = Calculations.CalcEnduranceRank(CurrentUser);
             string query = $"INSERT INTO Users (FullName, Gender, Age, RestHeartRate, Rank, ScheduleId)" +
-                $"VALUES ('{CurrentUser.FullName}', '{CurrentUser.Gender}', {CurrentUser.Age}, {CurrentUser.RestHeartRate}, {CurrentUser.Rank}, {CurrentUser.ScheduleId})";
+                $"VALUES ('{CurrentUser.FullName}', '{CurrentUser.Gender}', {CurrentUser.Age}, {CurrentUser.RestHeartRate}, {CurrentUser.Rank}, -1)";
             DbFunctions.ExcQuery(query);
             AllUsers = DbFunctions.GetUsers();
             StateHasChanged();

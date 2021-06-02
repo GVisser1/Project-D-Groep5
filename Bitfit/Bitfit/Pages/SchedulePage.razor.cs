@@ -14,7 +14,10 @@ namespace Bitfit.Pages
         protected override void OnInitialized()
         {
             AllSchedules = DbFunctions.GetSchedules();
-            ScheduleWorkouts = DbFunctions.GetCurrentWorkouts();
+            if(CurrentSchedule != null)
+            {
+                ScheduleWorkouts = DbFunctions.GetCurrentWorkouts();
+            }
             StateHasChanged();
         }
         public void CreateSchedule()
@@ -22,7 +25,7 @@ namespace Bitfit.Pages
             SetWorkouts((DbFunctions.GetAvailableWorkouts(UserPage.CurrentUser.Rank)));
             CurrentSchedule = new Schedule
             {
-                Id = UserPage.CurrentUser.ScheduleId,
+                Id = AllSchedules.Count + 1,
                 Rank = UserPage.CurrentUser.Rank,
                 Workout1Id = ScheduleWorkouts[0].Id,
                 Workout2Id = ScheduleWorkouts[1].Id,

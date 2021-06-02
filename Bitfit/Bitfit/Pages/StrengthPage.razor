@@ -18,8 +18,108 @@
     {
         <div>
             <h1>Strength</h1>
-            <h5>@CurrentWorkout.Description</h5>
-            <h5></h5>
+            <h5>@CurrentWorkout.Description</h5><br />
+            <div class="col col-nav">
+                @*Warming Ups*@
+                <table style="width:100%">
+                    <tr>
+                        <th style="text-align:left"> Waming Up 1</th>
+                        <th style="text-align:left"> Warming Up 2</th>
+                        @if (CurrentWorkout.Rank > 3)
+                        {
+                            <th style="text-align:left"> Warming Up 3</th>
+                        }
+                    </tr>
+                    <tr>
+                        <td style="text-align:left"> Jumping Jacks </td>
+                        <td style="text-align:left"> Squats </td>
+                        @if (CurrentWorkout.Rank > 3)
+                        {
+                            <td style="text-align:left"> Burpees </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td style="text-align:left"> 30 sec </td>
+                        <td style="text-align:left"> 30 sec </td>
+                        @if (CurrentWorkout.Rank > 3)
+                        {
+                            <td style="text-align:left"> 30 sec </td>
+                        }
+                    </tr>
+                </table>
+                <br />
+                @*Main Exercises*@
+                <table style="width:100%">
+                    <tr>
+                        @for (int i = 1; i < Exercises.Count + 1; i++)
+                        {
+                            if (i == 1)
+                            {
+                                <th style="text-align:left"> Main Exercise @i </th>
+                            }
+                            else
+                            {
+                                <th style="text-align:left; padding:0 18px"> Main Exercise @i </th>
+                            }
+                        }
+                    </tr>
+                    <tr>
+                        @for (int i = 0; i < Exercises.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <td style="text-align:left"> @Exercises[i] </td>
+}
+                            else
+                            {
+                                <td style="text-align:left; padding:0 18px"> @Exercises[i] </td>
+                            }
+
+                        }
+                    </tr>
+                    <tr>
+                        @for (int i = 0; i < Exercises.Count; i++)
+                        {
+                            if (i == 0)
+                            {
+                                <td style="text-align:left"> @AmountPerExercise x </td>
+                            }
+                            else
+                            {
+                                <td style="text-align:left; padding:0 18px"> @AmountPerExercise x </td>
+                            }
+                        }
+                    </tr>
+                </table>
+                <br />
+                @*Cooling Downs*@
+                <table style="width:100%">
+                    <tr>
+                        <th style="text-align:left"> Cooling Down 1 </th>
+                        <th style="text-align:left"> Cooling Down 2 </th>
+                        @if (CurrentWorkout.Rank > 3)
+                        {
+                            <th style="text-align:left"> Cooling Down 3 </th>
+                        }
+                    </tr>
+                    <tr>
+                        <td style="text-align:left"> Child's Pose </td>
+                        <td style="text-align:left"> Calf Stretch (Both Sides) </td>
+                        @if (CurrentWorkout.Rank > 3)
+                        {
+                            <td style="text-align:left"> "Lying Butterfly Stretch" </td>
+                        }
+                    </tr>
+                    <tr>
+                        <td style="text-align:left"> 30 sec </td>
+                        <td style="text-align:left"> 30 sec </td>
+                        @if (CurrentWorkout.Rank > 3)
+                        {
+                            <td style="text-align:left"> 30 sec </td>
+                        }
+                    </tr>
+                </table>
+            </div>
         </div>
     }
 </div>
