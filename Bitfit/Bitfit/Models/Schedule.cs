@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Bitfit.Models
 {
@@ -11,8 +9,9 @@ namespace Bitfit.Models
         [Required(ErrorMessage = "The Rank field is required")]
         [Range(1, 6, ErrorMessage = "The Rank field must be between 1 and 6")]
         public int Rank { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
-        public List<Workout> Workouts { get; set; }
+        public int Workout1Id { get; set; }
+        public int Workout2Id { get; set; }
+        public int Workout3Id { get; set; }
+
     }
 }

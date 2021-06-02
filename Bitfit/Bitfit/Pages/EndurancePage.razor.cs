@@ -1,11 +1,5 @@
 ﻿using Bitfit.Models;
-using Bitfit.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bitfit.Pages
 {
@@ -16,20 +10,8 @@ namespace Bitfit.Pages
         protected int Distance { get; set; }
         protected override void OnInitialized()
         {
-            if(SchedulePage.CurrentSchedule != null)
-                AllWorkouts = SchedulePage.CurrentSchedule.Workouts.ToList();
+            InitializeEnduranceTraining(CurrentWorkout.Rank);
             StateHasChanged();
-            if(AllWorkouts != null)
-            {
-                foreach (var workout in AllWorkouts)
-                {
-                    if (workout.Type == "Endurance")
-                    {
-                        CurrentWorkout = workout;
-                        InitializeEnduranceTraining(workout.Rank);
-                    }
-                }
-            }
         }
         public void InitializeEnduranceTraining(int rank)
         {

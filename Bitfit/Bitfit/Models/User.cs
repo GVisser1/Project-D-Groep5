@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bitfit.Models
 {
@@ -20,6 +17,6 @@ namespace Bitfit.Models
         [Range(1, int.MaxValue, ErrorMessage = "The Resting Heart Rate field must be greater than 0")]
         public int RestHeartRate { get; set; }
         public int Rank { get; set; }
-        public List<Schedule> Schedules { get; set; }
+        public int ScheduleId { get; set; }
     }
 }

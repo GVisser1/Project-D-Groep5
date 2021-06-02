@@ -26,8 +26,8 @@
                 </tr>
                 <tr>
                     <td>Monday</td>
-                    <td>Strength</td>
-                    <td><a role="button" class="btn btn-primary" style="width:100%" href="/strengthworkout">View workout</a></td>
+                    <td>@ScheduleWorkouts[0].Type</td>
+                    <td><a role="button" class="btn btn-primary" style="width:100%" href="@ScheduleWorkouts[0].Href">View workout</a></td>
                 </tr>
                 <tr>
                     <td>Tuesday</td>
@@ -35,8 +35,8 @@
                 </tr>
                 <tr>
                     <td>Wednesday</td>
-                    <td>HIIT</td>
-                    <td><a role="button" class="btn btn-primary" style="width:100%" href="/hiitworkout">View workout</a></td>
+                    <td>@ScheduleWorkouts[1].Type</td>
+                    <td><a role="button" class="btn btn-primary" style="width:100%" href="@ScheduleWorkouts[1].Href">View workout</a></td>
                 </tr>
                 <tr>
                     <td>Thursday</td>
@@ -49,8 +49,8 @@
                 </tr>
                 <tr>
                     <td>Saturday</td>
-                    <td>Endurance</td>
-                    <td><a role="button" class="btn btn-primary" style="width:100%" href="/enduranceworkout">View workout</a></td>
+                    <td>@ScheduleWorkouts[2].Type</td>
+                    <td><a role="button" class="btn btn-primary" style="width:100%" href="@ScheduleWorkouts[2].Href">View workout</a></td>
                 </tr>
                 <tr>
                     <td>Sunday</td>
@@ -63,8 +63,16 @@
     {
         <div class="col col-nav">
             <div class="content-nav-bottom">
-                <button class="btn btn-primary" style="width:100%" @onclick="AddSchedule">Add new schedule</button>
+                <button class="btn btn-primary" style="width:100%" @onclick="CreateSchedule">Create new schedule</button>
             </div>
+        </div>
+    }
+</div>
+<div class="row">
+    @if (UserPage.SignedIn && CurrentSchedule != null)
+    {
+        <div class="content-nav-bottom">
+            <br /><button class="btn btn-primary" style="width:100%" @onclick="RefreshSchedule">Create new schedule</button>
         </div>
     }
 </div>

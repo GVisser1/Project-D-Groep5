@@ -14,8 +14,8 @@
             <button class="btn btn-primary" style="top:55px; right:0; position:absolute" @onclick="SignOut">Sign Out</button>
             <h1>Welcome @CurrentUser.FullName!</h1>
             <h5>Your resting heart rate is @CurrentUser.RestHeartRate bpm</h5>
-            <h5>Your VO2max is @CalcVo2Max() ml/kg/min</h5>
-            <h5>You currently are in endurance group @CalcEnduranceRank()</h5>
+            <h5>Your VO2max is @Calculations.CalcVo2Max(CurrentUser) ml/kg/min</h5>
+            <h5>You currently are in endurance group @Calculations.CalcEnduranceRank(CurrentUser)</h5>
         </div>
     }
 </div>

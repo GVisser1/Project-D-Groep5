@@ -1,9 +1,5 @@
 ﻿using Bitfit.Models;
-using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Bitfit.Pages
 {
@@ -16,20 +12,8 @@ namespace Bitfit.Pages
         protected int BreakTime { get; set; }
         protected override void OnInitialized()
         {
-            if (SchedulePage.CurrentSchedule != null)
-                AllWorkouts = SchedulePage.CurrentSchedule.Workouts.ToList();
+            InitializeStrengthTraining(CurrentWorkout.Rank);
             StateHasChanged();
-            if (AllWorkouts != null)
-            {
-                foreach (var workout in AllWorkouts)
-                {
-                    if (workout.Type == "Endurance")
-                    {
-                        InitializeStrengthTraining(workout.Rank);
-                        CurrentWorkout = workout;
-                    }
-                }
-            }
         }
         public void InitializeStrengthTraining(int rank)
         {
