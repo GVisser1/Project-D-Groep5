@@ -1,5 +1,4 @@
 ﻿using Bitfit.Models;
-using System;
 using System.Collections.Generic;
 
 namespace Bitfit.Pages
@@ -50,7 +49,7 @@ namespace Bitfit.Pages
                 "Sumo Squat", "Side Leg Circles (Both Sides)", // Rank 3
                 "Swimmer And Superman", // Rank 4
                 "Pike Push-Ups", // Rank 5
-                "Glute Kick Back (Both Sides)"
+                "Glute Kick Back (Both Sides)" // Rank 6
             };
             return exercises;
         } 

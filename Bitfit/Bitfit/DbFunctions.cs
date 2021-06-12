@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.IO;
 
 namespace Bitfit
@@ -20,9 +21,9 @@ namespace Bitfit
             string database = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database/BitfitDb.db");
             conn = new SQLiteConnection("data source=" + database + ";Version=3");
         }
+        //Gets data from the database and returns the result
         public static DataRowCollection Select(string query)
         {
-            //deze functie haalt data op uit de database en returnd het resultaat
             string database = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database/BitfitDb.db");
             conn = new SQLiteConnection("data source=" + database + ";Version=3");
             conn.Open();
@@ -33,7 +34,7 @@ namespace Bitfit
             conn.Close();
             return dt.Rows;
         }
-        //query naar de database word uitgevoerd
+        // Executes the given query
         public static void ExcQuery(string Query)
         {
             conn.Open();
@@ -42,7 +43,7 @@ namespace Bitfit
             cmd.ExecuteNonQuery();
             conn.Close();
         }
-
+        // Retrieves all the users from the database
         public static List<User> GetUsers()
         {
             var AllUsers = new List<User>();
@@ -63,6 +64,7 @@ namespace Bitfit
             }
             return AllUsers;
         }
+        // Retrieves all the schedules from the database
         public static List<Schedule> GetSchedules()
         {
             var AllSchedules = new List<Schedule>();
@@ -83,6 +85,7 @@ namespace Bitfit
             }
             return AllSchedules;
         }
+        // Retrieves all the workouts from the database
         public static List<Workout> GetWorkouts()
         {
             var AllWorkouts = new List<Workout>();
@@ -99,6 +102,25 @@ namespace Bitfit
             }
             return AllWorkouts;
         }
+        // Retrieves all the fitbit credentials from the database
+        public static List<FitbitCreds> GetFitbitCreds()
+        {
+            var AllFitbitCred = new List<FitbitCreds>();
+            foreach (DataRow creds in Select("SELECT * FROM Fitbit"))
+            {
+                AllFitbitCred.Add(new FitbitCreds 
+                {
+                    Token = creds["Token"].ToString(),
+                    RefreshToken = creds["RefreshToken"].ToString(),
+                    Scope = creds["Scope"].ToString(),
+                    ExpiresIn = Int32.Parse(creds["ExpiresIn"].ToString()),
+                    TokenType = creds["TokenType"].ToString(),
+                    UserId = creds["UserId"].ToString()
+                });
+            }
+            return AllFitbitCred;
+        }
+        // Retrieves all the workouts that are available for a user given their rank
         public static List<Workout> GetAvailableWorkouts(int rank)
         {
             var AvailableWorkouts = new List<Workout>();
@@ -111,6 +133,8 @@ namespace Bitfit
             }
             return AvailableWorkouts;
         }
+        // Retrieves the workouts that are currently used in the user's schedule
+        // One of each workout is retrieved; HIIT, Endurance & Strength
         public static List<Workout> GetCurrentWorkouts()
         {
             var ScheduleWorkouts = new List<Workout>();

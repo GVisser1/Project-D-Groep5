@@ -20,6 +20,7 @@ namespace Bitfit.Pages
             }
             StateHasChanged();
         }
+        // Creates a new schedule if the user doesn't have one
         public void CreateSchedule()
         {
             SetWorkouts((DbFunctions.GetAvailableWorkouts(UserPage.CurrentUser.Rank)));
@@ -56,6 +57,7 @@ namespace Bitfit.Pages
             AllSchedules = DbFunctions.GetSchedules();
             StateHasChanged();
         }
+        // Refreshes the schedule; Workouts are changed and can potentially be more challenging if the user's rank has increased (Only with fitbit data)
         public void RefreshSchedule()
         {
             SetWorkouts((DbFunctions.GetAvailableWorkouts(UserPage.CurrentUser.Rank)));
@@ -87,6 +89,7 @@ namespace Bitfit.Pages
             AllSchedules = DbFunctions.GetSchedules();
             StateHasChanged();
         }
+        // Sets the workouts for a schedule; Random
         public void SetWorkouts(List<Workout> workouts)
         {
             var HiitWorkouts = new List<Workout>(); var EnduranceWorkouts = new List<Workout>(); var StrengthWorkouts = new List<Workout>();
@@ -105,6 +108,7 @@ namespace Bitfit.Pages
                         break;
                 }
             }
+            // Gets a random workout of every type
             TempWorkouts = new List<Workout>
             {
                 HiitWorkouts.ElementAt(new Random().Next(HiitWorkouts.Count)),
@@ -119,6 +123,7 @@ namespace Bitfit.Pages
                 GetRandomWorkout();
             }
         }
+        // Randomly assign a workout to an workoutId (from TempWorkouts from the Method: SetWorkouts)
         public void GetRandomWorkout()
         {
             int randomIndex = new Random().Next(TempWorkouts.Count);

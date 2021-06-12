@@ -5,18 +5,22 @@ namespace Bitfit
 {
     public class Calculations
     {
+        // Calculates the Max Heart Rate using the formula: 220 - Age
         public static int CalcMaxHeartRate(User CurrentUser)
         {
             return 220 - CurrentUser.Age;
         }
+        // Calculates the VO2Max using the formula: (Max Heart Rate / Resting Heart Rate) * 15
         public static double CalcVo2Max(User CurrentUser)
         {
             return Math.Round((((double)CalcMaxHeartRate(CurrentUser) / CurrentUser.RestHeartRate) * 15), 2);
         }
+        // Calculates the Endurance rank based on the user's age and endurance
         public static int CalcEnduranceRank(User CurrentUser)
         {
             return CheckEndurance(CheckAgeThreshold(CurrentUser),CurrentUser);
         }
+        // Checks the age of the user and assigns them to a row
         public static int CheckAgeThreshold(User CurrentUser)
         {
             int[] ageThresholds = new int[] { 13, 20, 30, 40, 50, 60 };
@@ -29,7 +33,7 @@ namespace Bitfit
             }
             return row;
         }
-
+        // Checks the endurance of the user based on the VO2Max, Gender and Age
         public static int CheckEndurance(int row, User CurrentUser)
         {
             #region VO2Max Data

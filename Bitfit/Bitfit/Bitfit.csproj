@@ -13,6 +13,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Database\BitfitDb.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="Database\BitfitDb.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database\BitfitDb.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Pages\Error.cshtml" />
     <None Include="Pages\_Host.cshtml" />
     <None Include="Shared\MainLayout.razor" />
@@ -20,17 +36,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Fitbit.NET" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.114.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Database\BitfitDb.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <PackageReference Include="System.Web.Http.Common" Version="4.0.20126.16343" />
   </ItemGroup>
 
 </Project>

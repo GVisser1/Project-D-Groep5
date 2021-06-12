@@ -18,22 +18,22 @@ namespace Bitfit.Pages
             switch (rank)
             {
                 case 1:
-                    Distance = 5; // km
+                    Distance = 2; // km
                     break;
                 case 2:
-                    Distance = 8; // km
+                    Distance = 3; // km
                     break;
                 case 3:
-                    Distance = 12; // km
+                    Distance = 5; // km
                     break;
                 case 4:
-                    Distance = 15; // km
+                    Distance = 7; // km
                     break;
                 case 5:
-                    Distance = 18; // km
+                    Distance = 10; // km
                     break;
                 case 6:
-                    Distance = 20; // km
+                    Distance = 12; // km
                     break;
             }
         }
