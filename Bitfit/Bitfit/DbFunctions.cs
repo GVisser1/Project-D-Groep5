@@ -135,5 +135,22 @@ namespace Bitfit
             }
             return ScheduleWorkouts;
         }
+        public static List<Challenge> GetChallenges()
+        {
+            var AllChallenges = new List<Challenge>();
+            foreach (DataRow challenge in Select("SELECT * FROM Challenges"))
+            {
+                AllChallenges.Add(new Challenge
+                {
+                    Id = Int32.Parse(challenge["Id"].ToString()),
+                    Name = challenge["Name"].ToString(),
+                    Rank = Int32.Parse(challenge["Rank"].ToString()),
+                    ScheduleId = Int32.Parse(challenge["ScheduleId"].ToString()),
+                    Description = challenge["Description"].ToString()
+                });
+            }
+            return AllChallenges;
+
+        }
     }
 }
