@@ -71,9 +71,9 @@ namespace Bitfit.Pages
             }
 
             // Call this method to get an authorization code -> Check the debugger for a link and get the code from the url when it is entered in a browser
-            //Authorize();
+            //FitbitFunctions.Authorize();
             // Call this method to get an accestoken with token an refreshtoken -> Use the obtained authorization code from the Authorize method
-            //AccessToken = await ExchangeAuthCodeForAccessTokenAsync("6fabf711cabd3dfc429b2bedebe2defb6f16b80c");  
+            //AccessToken = await FitbitFunctions.ExchangeAuthCodeForAccessTokenAsync("d75dbc04465ab1ce13f4dc5fad825e9de220fc8f");  
 
             // If the Id of the selected user is 1, than the fitbit api is called and data is retrieved -> In this case the resting heart rate
             if (CurrentUser.Id == 1)
@@ -130,7 +130,6 @@ namespace Bitfit.Pages
                 AllUsers = DbFunctions.GetUsers();
                 StateHasChanged();
             }
-
         }
         // The current user is signed out
         public void SignOut()

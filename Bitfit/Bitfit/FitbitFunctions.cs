@@ -34,6 +34,7 @@ namespace Bitfit
             HttpResponseMessage response = await httpClient.PostAsync(postUrl, content);
             string responseString = await response.Content.ReadAsStringAsync();
             OAuth2AccessToken accessToken = ParseAccessTokenResponse(responseString);
+            Debug.WriteLine(accessToken.Token + "\n" + accessToken.RefreshToken);
             return accessToken;
         }
         // Refreshes the accestoken
@@ -83,7 +84,7 @@ namespace Bitfit
         // Retrieves an authorization code -> Check the debugger for an url and use it to get the code inside of the new url
         // EX: The method print out https://www.google.com -> Go to this website -> When given acces the url changes to https://www.google.com/callback?code=7b64c4b088b9c841d15bcac15d4aa7433d35af3e#_=_
         // the code is in this case 7b64c4b088b9c841d15bcac15d4aa7433d35af3e
-        public void Authorize()
+        public static void Authorize()
         {
             var appCredentials = new FitbitAppCredentials()
             {
