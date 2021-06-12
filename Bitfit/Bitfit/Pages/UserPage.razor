@@ -11,7 +11,7 @@
     else
     {
         <div>
-            <button class="btn btn-primary" style="top:55px; right:0; position:absolute" @onclick="SignOut">Sign Out</button>
+            <button class="btn btn-danger" style="top:55px; right:0; position:absolute" @onclick="SignOut">Sign Out</button>
             <h1>Welcome @CurrentUser.FullName!</h1>
             <h5>Your resting heart rate is @CurrentUser.RestHeartRate bpm</h5>
             <h5>Your VO2max is @Calculations.CalcVo2Max(CurrentUser) ml/kg/min</h5>
@@ -29,13 +29,14 @@
                 {
                     @foreach (var user in AllUsers)
                     {
-                        <button class="btn btn-primary" style="width:100%" @onclick="() => SelectUser(user)">@user.FullName</button>
+                        <button class="btn btn-success" style="width:100%" @onclick="() => SelectUser(user)">@user.FullName</button>
                     }
                 }
                 <br />
             </div>
+            <br>
             <div class="content-nav-bottom">
-                <button class="btn btn-primary" style="width:100%" @onclick="OnNewUser">Add new user</button>
+                <button class="btn btn-secondary" style="width:100%" @onclick="OnNewUser">Add new user</button>
             </div>
         </div>
         <div class="col">
@@ -51,7 +52,7 @@
                             <h6>Age: </h6><InputNumber class="form-control editItemInput" placeholder="Age" @bind-Value="CurrentUser.Age"></InputNumber><br />
                             <h6>Resting heart rate: </h6><InputNumber class="form-control editItemInput" placeholder="Resting heart rate" @bind-Value="CurrentUser.RestHeartRate"></InputNumber>
                         </div>
-                        <button class="btn btn-primary" style="width:100%" type="submit"> Save </button>
+                        <button class="btn btn-success" style="width:100%" type="submit"> Save </button>
                     </EditForm>
                 </div>
             }
