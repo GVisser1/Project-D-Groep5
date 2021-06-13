@@ -139,6 +139,10 @@ namespace Bitfit.Pages
             HiitPage.CurrentWorkout = null;
             EndurancePage.CurrentWorkout = null;
             StrengthPage.CurrentWorkout = null;
+            ChallengePage.CurrentChallenge = null;
+            ChallengeWorkoutPage.CurrentWorkout1 = null;
+            ChallengeWorkoutPage.CurrentWorkout2 = null;
+            ChallengeWorkoutPage.CurrentWorkout3 = null;
         }
         // Is called when a user is being added
         public void OnNewUser()

@@ -5,13 +5,50 @@
     {
         <div>
             <h1>You are not signed in!</h1>
-            <a role="button" class="btn btn-primary" href="/">Login</a>
+            <a role="button" class="btn btn-success" href="/">Login</a>
         </div>
     }
     else
     {
         <div>
             <h1>Challenges</h1>
+        </div>
+    }
+</div>
+<div class="row">
+    @if (UserPage.SignedIn)
+    {
+        <div class="col col-nav">
+
+            <div style="height: 660px; max-height:100%; overflow-y:auto; background-color:#eee;">
+                @if (AllChallenges != null)
+                {
+                    @foreach (var challenge in AllChallenges)
+                    {
+                        @if (challenge.Rank <= UserPage.CurrentUser.Rank)
+                        {
+                            <button class="btn btn-success" style="width:100%" @onclick="() => SelectChallenge(challenge)">@challenge.Name</button>
+                        }
+                    }
+                }
+                <br />
+            </div>
+            <br>
+        </div>
+        <div class="col">
+            @if (CurrentChallenge != null)
+            {
+                <div style="height:660px; max-height:100%">
+                    <div style="height:660px; max-height:100%;">
+                        <h1>@CurrentChallenge.Name</h1>
+                        <h5>@foreach (var item in FormattedDescription) { 
+                            @item <br />
+                        }</h5><br />
+                        <h5>Required rank: @CurrentChallenge.Rank</h5>
+                    </div>
+                    <button class="btn btn-success" style="width:100%" @onclick="() => StartChallenge(CurrentChallenge)">Start Challenge</button>
+                </div>
+            }
         </div>
     }
 </div>

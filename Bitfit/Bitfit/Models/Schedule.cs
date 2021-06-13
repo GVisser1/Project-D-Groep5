@@ -12,6 +12,6 @@ namespace Bitfit.Models
         public int Workout1Id { get; set; }
         public int Workout2Id { get; set; }
         public int Workout3Id { get; set; }
-
+        public string Type { get; set; }
     }
 }

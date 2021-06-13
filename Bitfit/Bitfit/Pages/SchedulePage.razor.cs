@@ -14,7 +14,7 @@ namespace Bitfit.Pages
         protected override void OnInitialized()
         {
             AllSchedules = DbFunctions.GetSchedules();
-            if(CurrentSchedule != null)
+            if (CurrentSchedule != null)
             {
                 ScheduleWorkouts = DbFunctions.GetCurrentWorkouts();
             }
@@ -30,14 +30,15 @@ namespace Bitfit.Pages
                 Rank = UserPage.CurrentUser.Rank,
                 Workout1Id = ScheduleWorkouts[0].Id,
                 Workout2Id = ScheduleWorkouts[1].Id,
-                Workout3Id = ScheduleWorkouts[2].Id
+                Workout3Id = ScheduleWorkouts[2].Id,
+                Type = "Standard"
             };
             string query = $"UPDATE Users " +
                 $"SET ScheduleId = {CurrentSchedule.Id} " +
                 $"WHERE Id = {UserPage.CurrentUser.Id}";
             DbFunctions.ExcQuery(query);
-            query = $"INSERT INTO Schedules (Rank, Workout1Id, Workout2Id, Workout3Id)" +
-                $"VALUES ({CurrentSchedule.Rank}, {CurrentSchedule.Workout1Id}, {CurrentSchedule.Workout2Id}, {CurrentSchedule.Workout3Id})";
+            query = $"INSERT INTO Schedules (Rank, Workout1Id, Workout2Id, Workout3Id, Type) " +
+                $"VALUES ({CurrentSchedule.Rank}, {CurrentSchedule.Workout1Id}, {CurrentSchedule.Workout2Id}, {CurrentSchedule.Workout3Id}, '{CurrentSchedule.Type}')";
             DbFunctions.ExcQuery(query);
             foreach (var workout in ScheduleWorkouts)
             {
@@ -118,7 +119,7 @@ namespace Bitfit.Pages
 
             ScheduleWorkouts = new List<Workout>();
             int length = TempWorkouts.Count;
-            for(int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++)
             {
                 GetRandomWorkout();
             }
