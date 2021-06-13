@@ -62,10 +62,20 @@ namespace Bitfit.Pages
         public void RefreshSchedule()
         {
             SetWorkouts((DbFunctions.GetAvailableWorkouts(UserPage.CurrentUser.Rank)));
-            CurrentSchedule.Workout1Id = ScheduleWorkouts[0].Id;
-            CurrentSchedule.Workout2Id = ScheduleWorkouts[1].Id;
-            CurrentSchedule.Workout3Id = ScheduleWorkouts[2].Id;
-            string query = $"UPDATE Schedules " +
+            CurrentSchedule = new Schedule
+            {
+                Id = AllSchedules.Count + 1,
+                Rank = UserPage.CurrentUser.Rank,
+                Workout1Id = ScheduleWorkouts[0].Id,
+                Workout2Id = ScheduleWorkouts[1].Id,
+                Workout3Id = ScheduleWorkouts[2].Id,
+                Type = "Standard"
+            };
+            string query = $"UPDATE Users " +
+                $"SET ScheduleId = {CurrentSchedule.Id} " +
+                $"WHERE Id = {UserPage.CurrentUser.Id}";
+            DbFunctions.ExcQuery(query);
+            query = $"UPDATE Schedules " +
                 $"SET Workout1Id = {CurrentSchedule.Workout1Id}, Workout2Id = {CurrentSchedule.Workout2Id}, Workout3Id = {CurrentSchedule.Workout3Id} " +
                 $"WHERE Id = {CurrentSchedule.Id}";
             DbFunctions.ExcQuery(query);
@@ -75,15 +85,12 @@ namespace Bitfit.Pages
                 {
                     case "HIIT":
                         HiitPage.CurrentWorkout = workout;
-                        System.Diagnostics.Debug.WriteLine($"----------------- \n{workout.Type}\n ----------------");
                         break;
                     case "Endurance":
                         EndurancePage.CurrentWorkout = workout;
-                        System.Diagnostics.Debug.WriteLine($"----------------- \n{workout.Type}\n ----------------");
                         break;
                     case "Strength":
                         StrengthPage.CurrentWorkout = workout;
-                        System.Diagnostics.Debug.WriteLine($"----------------- \n{workout.Type}\n ----------------");
                         break;
                 }
             }

@@ -17,16 +17,18 @@ namespace Bitfit.Pages
         {
             AllChallenges = DbFunctions.GetChallenges();
             AllSchedules = DbFunctions.GetSchedules();
+            CurrentChallenge = null;
             StateHasChanged();
         }
 
+        // Selects the chosen challenge
         public void SelectChallenge(Challenge challenge)
         {
             CurrentChallenge = challenge;
             FormattedDescription = CurrentChallenge.Description.Split(';');
-            foreach(var schedule in AllSchedules)
+            foreach (var schedule in AllSchedules)
             {
-                if(schedule.Id == CurrentChallenge.ScheduleId)
+                if (schedule.Id == CurrentChallenge.ScheduleId)
                 {
                     ChallengeSchedule = schedule;
                     break;
@@ -34,27 +36,30 @@ namespace Bitfit.Pages
             }
         }
 
-        public void StartChallenge(Challenge challenge)
+        // Sets the selected challenge as the new schedule
+        public void StartChallenge()
         {
-            if (UserPage.CurrentUser.ScheduleId != 0)
+            foreach (var schedule in AllSchedules)
             {
-                foreach (var schedule in AllSchedules)
+                UserPage.CurrentUser.ScheduleId = ChallengeSchedule.Id;
+                if (schedule.Id == UserPage.CurrentUser.ScheduleId)
                 {
-                    if (schedule.Id == UserPage.CurrentUser.ScheduleId)
-                    {
-                        schedule.Workout1Id = ChallengeSchedule.Workout1Id;
-                        schedule.Workout2Id = ChallengeSchedule.Workout2Id;
-                        schedule.Workout3Id = ChallengeSchedule.Workout3Id;
+                    schedule.Workout1Id = ChallengeSchedule.Workout1Id;
+                    schedule.Workout2Id = ChallengeSchedule.Workout2Id;
+                    schedule.Workout3Id = ChallengeSchedule.Workout3Id;
 
-                        string query = $"UPDATE Schedules " +
-                    $"SET Workout1Id = {schedule.Workout1Id}, Workout2Id = {schedule.Workout2Id}, Workout3Id = {schedule.Workout3Id} " +
-                    $"WHERE Id = {schedule.Id}";
-                        DbFunctions.ExcQuery(query);
+                    string query = $"UPDATE Schedules " +
+                        $"SET Workout1Id = {schedule.Workout1Id}, Workout2Id = {schedule.Workout2Id}, Workout3Id = {schedule.Workout3Id} " +
+                        $"WHERE Id = {schedule.Id}";
+                    DbFunctions.ExcQuery(query);
+                    query = $"UPDATE Users " +
+                        $"SET ScheduleId = {UserPage.CurrentUser.ScheduleId} " +
+                        $"WHERE Id = {UserPage.CurrentUser.Id}";
+                    DbFunctions.ExcQuery(query);
 
-                        SchedulePage.CurrentSchedule = schedule;
-                        StateHasChanged();
-                        break;
-                    }
+                    SchedulePage.CurrentSchedule = schedule;
+                    StateHasChanged();
+                    break;
                 }
             }
         }

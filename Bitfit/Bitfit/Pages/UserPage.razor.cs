@@ -95,7 +95,6 @@ namespace Bitfit.Pages
                     $"SET Token = '{AccessToken.Token}', RefreshToken = '{AccessToken.RefreshToken}' " +
                     $"WHERE Id = 1";
                 DbFunctions.ExcQuery(query);
-                Debug.WriteLine(AccessToken.Token + "\n" + AccessToken.RefreshToken + "\n");
                 Client = new FitbitClient(AppCredentials, AccessToken);
                 AllFitbitCreds = DbFunctions.GetFitbitCreds();
 
@@ -139,10 +138,6 @@ namespace Bitfit.Pages
             HiitPage.CurrentWorkout = null;
             EndurancePage.CurrentWorkout = null;
             StrengthPage.CurrentWorkout = null;
-            ChallengePage.CurrentChallenge = null;
-            ChallengeWorkoutPage.CurrentWorkout1 = null;
-            ChallengeWorkoutPage.CurrentWorkout2 = null;
-            ChallengeWorkoutPage.CurrentWorkout3 = null;
         }
         // Is called when a user is being added
         public void OnNewUser()

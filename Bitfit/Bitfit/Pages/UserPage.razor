@@ -48,7 +48,11 @@
                             <DataAnnotationsValidator />
                             <ValidationSummary />
                             <h6>Full name: </h6><InputText class="form-control editItemInput" placeholder="Full name" @bind-Value="CurrentUser.FullName"></InputText><br />
-                            <h6>Gender(M/F): </h6><InputText class="form-control editItemInput" placeholder="Gender" @bind-Value="CurrentUser.Gender"></InputText><br />
+                            <h6>Gender(M/F): </h6><InputSelect class="form-control editItemInput" @bind-Value="CurrentUser.Gender">
+                                <option value="" selected disabled hidden>Choose here</option>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </InputSelect><br />
                             <h6>Age: </h6><InputNumber class="form-control editItemInput" placeholder="Age" @bind-Value="CurrentUser.Age"></InputNumber><br />
                             <h6>Resting heart rate: </h6><InputNumber class="form-control editItemInput" placeholder="Resting heart rate" @bind-Value="CurrentUser.RestHeartRate"></InputNumber>
                         </div>

@@ -159,6 +159,7 @@ namespace Bitfit
             }
             return ScheduleWorkouts;
         }
+        // Retrieves all the challenges from the database
         public static List<Challenge> GetChallenges()
         {
             var AllChallenges = new List<Challenge>();

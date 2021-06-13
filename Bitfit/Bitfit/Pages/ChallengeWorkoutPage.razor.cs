@@ -19,26 +19,28 @@ namespace Bitfit.Pages
 
             AllWorkouts = DbFunctions.GetWorkouts();
 
-            foreach(var workout in AllWorkouts)
+            if (UserPage.SignedIn)
             {
-                if(workout.Id == CurrentSchedule.Workout1Id)
+                foreach (var workout in AllWorkouts)
                 {
-                    CurrentWorkout1 = workout;
+                    if (workout.Id == CurrentSchedule.Workout1Id)
+                    {
+                        CurrentWorkout1 = workout;
+                    }
+                    else if (workout.Id == CurrentSchedule.Workout2Id)
+                    {
+                        CurrentWorkout2 = workout;
+                    }
+                    else if (workout.Id == CurrentSchedule.Workout3Id)
+                    {
+                        CurrentWorkout3 = workout;
+                    }
                 }
-                else if (workout.Id == CurrentSchedule.Workout2Id)
-                {
-                    CurrentWorkout2 = workout;
-                }
-                else if (workout.Id == CurrentSchedule.Workout3Id)
-                {
-                    CurrentWorkout3 = workout;
-                }
+                // Splits the description
+                Workout1Array = CurrentWorkout1.Description.Split(';');
+                Workout2Array = CurrentWorkout2.Description.Split(';');
+                Workout3Array = CurrentWorkout3.Description.Split(';');
             }
-
-            Workout1Array = CurrentWorkout1.Description.Split(';');
-            Workout2Array = CurrentWorkout2.Description.Split(';');
-            Workout3Array = CurrentWorkout3.Description.Split(';');
-
             StateHasChanged();
         }
     }

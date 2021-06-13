@@ -24,16 +24,16 @@ namespace Bitfit.Pages
                     Distance = 3; // km
                     break;
                 case 3:
-                    Distance = 5; // km
+                    Distance = 4; // km
                     break;
                 case 4:
-                    Distance = 7; // km
+                    Distance = 5; // km
                     break;
                 case 5:
-                    Distance = 10; // km
+                    Distance = 6; // km
                     break;
                 case 6:
-                    Distance = 12; // km
+                    Distance = 7; // km
                     break;
             }
         }

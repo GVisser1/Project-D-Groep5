@@ -63,7 +63,6 @@ namespace Bitfit
 
             HttpResponseMessage response = await httpClient.PostAsync(postUrl, content);
             string responseString = await response.Content.ReadAsStringAsync();
-            Debug.WriteLine(responseString);
             return ParseAccessTokenResponse(responseString);
         }
         // Parses data from json into the OAuth2AccessToken format
